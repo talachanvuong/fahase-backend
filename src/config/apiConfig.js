@@ -1,11 +1,11 @@
-import cp from 'cookie-parser'
 import cors from 'cors'
 import { json } from 'express'
+import session from 'express-session'
+import passport from 'passport'
 import envConfig from './envConfig.js'
 import routerConfig from './routerConfig.js'
 
 export default (app) => {
-  app.use(cp())
   app.use(
     cors({
       origin: envConfig.corsOrigin,
@@ -13,5 +13,14 @@ export default (app) => {
     })
   )
   app.use(json())
+  app.use(
+    session({
+      secret: envConfig.secretKey,
+      resave: false,
+      saveUninitialized: true,
+    })
+  )
+  app.use(passport.initialize())
+  app.use(passport.session())
   app.use('/api', routerConfig)
 }
