@@ -1,5 +1,5 @@
 export const sendResponse = (res, status, message, result = null) => {
-  const response = { message }
+  const response = { status, message }
 
   if (result !== null) {
     response.result = result

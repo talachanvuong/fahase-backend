@@ -17,7 +17,7 @@ export default (app) => {
     session({
       secret: envConfig.secretKey,
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: false,
     })
   )
   app.use(passport.initialize())

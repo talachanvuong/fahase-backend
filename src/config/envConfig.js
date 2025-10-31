@@ -6,4 +6,5 @@ export default {
   secretKey: process.env.SECRET_KEY,
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  mongoUri: process.env.MONGO_URI,
 }
