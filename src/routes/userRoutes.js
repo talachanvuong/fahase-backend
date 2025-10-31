@@ -13,7 +13,7 @@ router.get(
   errorMiddleware
 )
 
-router.get(
+router.post(
   '/logout',
   authMiddleware.tokenRequired,
   asyncMiddleware(userController.logout),

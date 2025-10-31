@@ -10,7 +10,7 @@ const authorized = [
     failureRedirect: `${envConfig.corsOrigin}/login`,
   }),
   (req, res) => {
-    res.redirect(envConfig.corsOrigin)
+    return res.redirect(envConfig.corsOrigin)
   },
 ]
 

@@ -1,3 +1,4 @@
+import MongoStore from 'connect-mongo'
 import cors from 'cors'
 import { json } from 'express'
 import session from 'express-session'
@@ -18,6 +19,11 @@ export default (app) => {
       secret: envConfig.secretKey,
       resave: false,
       saveUninitialized: false,
+      store: MongoStore.create({
+        mongoUrl: envConfig.mongoUri,
+        collectionName: 'sessions',
+        ttl: 3600 * 24 * 7,
+      }),
     })
   )
   app.use(passport.initialize())
