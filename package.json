@@ -14,7 +14,6 @@
     "express-session": "^1.18.2",
     "joi": "^18.0.1",
     "mongoose": "^8.18.3",
-    "mongoose-sequence": "^6.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
   },

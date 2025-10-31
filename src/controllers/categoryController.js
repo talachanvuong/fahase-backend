@@ -15,8 +15,8 @@ const getById = async (req, res) => {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
   }
 
-  const { category_id } = value
-  const category = await categoryService.getById(category_id)
+  const { _id } = value
+  const category = await categoryService.getById(_id)
 
   if (!category) {
     return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Không có loại sản phẩm')
@@ -33,9 +33,8 @@ const add = async (req, res) => {
   }
 
   const { title } = value
-  const existing = await categoryService.getByTitle(title)
 
-  if (existing) {
+  if (await categoryService.getByTitle(title)) {
     return sendResponse(
       res,
       STATUS_CODE.BAD_REQUEST,
@@ -43,9 +42,9 @@ const add = async (req, res) => {
     )
   }
 
-  await categoryService.add({ title })
+  await categoryService.add(value)
 
-  return sendResponse(res, STATUS_CODE.SUCCESS, 'Thêm loại sản phẩm thành công')
+  return sendResponse(res, STATUS_CODE.CREATED, 'Thêm loại sản phẩm thành công')
 }
 
 const remove = async (req, res) => {
@@ -55,10 +54,9 @@ const remove = async (req, res) => {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
   }
 
-  const { category_id } = value
-  const existing = await categoryService.getById(category_id)
+  const { _id } = value
 
-  if (!existing) {
+  if (!(await categoryService.getById(_id))) {
     return sendResponse(
       res,
       STATUS_CODE.BAD_REQUEST,
@@ -66,7 +64,7 @@ const remove = async (req, res) => {
     )
   }
 
-  await categoryService.remove(category_id)
+  await categoryService.remove(_id)
 
   return sendResponse(res, STATUS_CODE.SUCCESS, 'Xóa loại sản phẩm thành công')
 }

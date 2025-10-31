@@ -1,11 +1,24 @@
 import Joi from 'joi'
 
 const getById = Joi.object({
-  category_id: Joi.number().integer().messages({
-    'number.base': 'category_id phải là số',
-    'number.integer': 'category_id phải là số nguyên',
-  }),
+  _id: Joi.string()
+    .trim()
+    .regex(/^[0-9a-f]{24}$/)
+    .required()
+    .messages({
+      'any.required': 'Thiếu _id',
+      'string.base': '_id phải là chuỗi',
+      'string.empty': '_id không được để trống',
+      'string.pattern.base': '_id không hợp lệ',
+    }),
 })
+  .required()
+  .messages({
+    'any.required': 'Thiếu params',
+    'object.base': 'params phải là object',
+    'object.empty': 'params không được để trống',
+    'object.unknown': 'Thừa trường',
+  })
 
 const add = Joi.object({
   title: Joi.string().trim().max(32).required().messages({
@@ -16,14 +29,32 @@ const add = Joi.object({
   }),
 })
   .required()
-  .messages({ 'any.required': 'Thiếu body' })
+  .messages({
+    'any.required': 'Thiếu body',
+    'object.base': 'body phải là object',
+    'object.empty': 'body không được để trống',
+    'object.unknown': 'Thừa trường',
+  })
 
 const remove = Joi.object({
-  category_id: Joi.number().integer().messages({
-    'number.base': 'category_id phải là số',
-    'number.integer': 'category_id phải là số nguyên',
-  }),
+  _id: Joi.string()
+    .trim()
+    .regex(/^[0-9a-f]{24}$/)
+    .required()
+    .messages({
+      'any.required': 'Thiếu _id',
+      'string.base': '_id phải là chuỗi',
+      'string.empty': '_id không được để trống',
+      'string.pattern.base': '_id không hợp lệ',
+    }),
 })
+  .required()
+  .messages({
+    'any.required': 'Thiếu params',
+    'object.base': 'params phải là object',
+    'object.empty': 'params không được để trống',
+    'object.unknown': 'Thừa trường',
+  })
 
 export default {
   getById,

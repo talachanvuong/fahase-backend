@@ -4,8 +4,8 @@ const getAll = async () => {
   return await Category.find()
 }
 
-const getById = async (category_id) => {
-  return await Category.findOne({ category_id })
+const getById = async (_id) => {
+  return await Category.findOne({ _id })
 }
 
 const getByTitle = async (title) => {
@@ -17,8 +17,8 @@ const add = async (data) => {
   await category.save()
 }
 
-const remove = async (category_id) => {
-  await Category.deleteOne({ category_id })
+const remove = async (_id) => {
+  await Category.deleteOne({ _id })
 }
 
 export default {

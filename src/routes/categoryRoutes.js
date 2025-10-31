@@ -14,7 +14,7 @@ router.get(
 )
 
 router.get(
-  '/getById/:category_id',
+  '/getById/:_id',
   authMiddleware.tokenRequired,
   asyncMiddleware(categoryController.getById),
   errorMiddleware
@@ -28,7 +28,7 @@ router.post(
 )
 
 router.delete(
-  '/delete/:category_id',
+  '/delete/:_id',
   authMiddleware.tokenRequired,
   asyncMiddleware(categoryController.remove),
   errorMiddleware
