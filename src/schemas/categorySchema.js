@@ -10,11 +10,10 @@ const getById = Joi.object({
 })
 
 const add = Joi.object({
-  title: Joi.string().trim().max(32).required().messages({
+  title: Joi.string().trim().required().messages({
     'any.required': 'Thiếu title',
     'string.base': 'title phải là chuỗi',
     'string.empty': 'title không được để trống',
-    'string.max': 'title quá dài',
   }),
 })
   .required()

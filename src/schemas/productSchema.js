@@ -10,11 +10,10 @@ const getAllByCategory = Joi.object({
 })
 
 const add = Joi.object({
-  title: Joi.string().trim().max(64).required().messages({
+  title: Joi.string().trim().required().messages({
     'any.required': 'Thiếu title',
     'string.base': 'title phải là chuỗi',
     'string.empty': 'title không được để trống',
-    'string.max': 'title quá dài',
   }),
   price: Joi.number().integer().min(0).required().messages({
     'any.required': 'Thiếu price',
@@ -22,28 +21,19 @@ const add = Joi.object({
     'number.integer': 'price phải là số nguyên',
     'number.min': 'price không được nhỏ hơn 0',
   }),
-  thumbnail: Joi.binary()
-    .max(1024 * 1024 * 5)
-    .required()
-    .messages({
-      'any.required': 'Thiếu thumbnail',
-      'binary.base': 'thumbnail phải là binary',
-      'binary.max': 'thumbnail không được vượt quá 5 MB',
-    }),
-  description: Joi.string().trim().max(4096).required().messages({
+  thumbnail: Joi.binary().required().messages({
+    'any.required': 'Thiếu thumbnail',
+    'binary.base': 'thumbnail phải là binary',
+  }),
+  description: Joi.string().trim().required().messages({
     'any.required': 'Thiếu description',
     'string.base': 'description phải là chuỗi',
     'string.empty': 'description không được để trống',
-    'string.max': 'description quá dài',
   }),
-  file: Joi.binary()
-    .max(1024 * 1024 * 20)
-    .required()
-    .messages({
-      'any.required': 'Thiếu file',
-      'binary.base': 'file phải là binary',
-      'binary.max': 'file không được vượt quá 20 MB',
-    }),
+  file: Joi.binary().required().messages({
+    'any.required': 'Thiếu file',
+    'binary.base': 'file phải là binary',
+  }),
   category: Joi.string()
     .trim()
     .regex(/^[0-9a-f]{24}$/)
@@ -81,33 +71,25 @@ const updateParams = Joi.object({
 })
 
 const updateBody = Joi.object({
-  title: Joi.string().trim().max(64).messages({
+  title: Joi.string().trim().messages({
     'string.base': 'title phải là chuỗi',
     'string.empty': 'title không được để trống',
-    'string.max': 'title quá dài',
   }),
   price: Joi.number().integer().min(0).messages({
     'number.base': 'price phải là số',
     'number.integer': 'price phải là số nguyên',
     'number.min': 'price không được nhỏ hơn 0',
   }),
-  thumbnail: Joi.binary()
-    .max(1024 * 1024 * 5)
-    .messages({
-      'binary.base': 'thumbnail phải là binary',
-      'binary.max': 'thumbnail không được vượt quá 5 MB',
-    }),
-  description: Joi.string().trim().max(4096).messages({
+  thumbnail: Joi.binary().messages({
+    'binary.base': 'thumbnail phải là binary',
+  }),
+  description: Joi.string().trim().messages({
     'string.base': 'description phải là chuỗi',
     'string.empty': 'description không được để trống',
-    'string.max': 'description quá dài',
   }),
-  file: Joi.binary()
-    .max(1024 * 1024 * 20)
-    .messages({
-      'binary.base': 'file phải là binary',
-      'binary.max': 'file không được vượt quá 20 MB',
-    }),
+  file: Joi.binary().messages({
+    'binary.base': 'file phải là binary',
+  }),
   category: Joi.string()
     .trim()
     .regex(/^[0-9a-f]{24}$/)
