@@ -34,7 +34,7 @@ const add = async (req, res) => {
 
   const { title } = value
 
-  if (await categoryService.getByTitle(title)) {
+  if (await categoryService.existByTitle(title)) {
     return sendResponse(
       res,
       STATUS_CODE.BAD_REQUEST,
@@ -56,7 +56,7 @@ const remove = async (req, res) => {
 
   const { _id } = value
 
-  if (!(await categoryService.getById(_id))) {
+  if (!(await categoryService.existById(_id))) {
     return sendResponse(
       res,
       STATUS_CODE.BAD_REQUEST,

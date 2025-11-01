@@ -8,8 +8,12 @@ const getById = async (_id) => {
   return await Category.findOne({ _id })
 }
 
-const getByTitle = async (title) => {
-  return await Category.findOne({ title })
+const existById = async (_id) => {
+  return await Category.exists({ _id })
+}
+
+const existByTitle = async (title) => {
+  return await Category.exists({ title })
 }
 
 const add = async (data) => {
@@ -24,7 +28,8 @@ const remove = async (_id) => {
 export default {
   getAll,
   getById,
-  getByTitle,
+  existById,
+  existByTitle,
   add,
   remove,
 }
