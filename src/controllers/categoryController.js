@@ -64,6 +64,10 @@ const remove = async (req, res) => {
     )
   }
 
+  if (await categoryService.containProduct(_id)) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Còn sản phẩm thuộc loại')
+  }
+
   await categoryService.remove(_id)
 
   return sendResponse(res, STATUS_CODE.SUCCESS, 'Xóa loại sản phẩm thành công')

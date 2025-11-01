@@ -1,4 +1,5 @@
 import Category from '../models/Category.js'
+import Product from '../models/Product.js'
 
 const getAll = async () => {
   return await Category.find()
@@ -25,6 +26,10 @@ const remove = async (_id) => {
   await Category.deleteOne({ _id })
 }
 
+const containProduct = async (_id) => {
+  return await Product.exists({ category: _id })
+}
+
 export default {
   getAll,
   getById,
@@ -32,4 +37,5 @@ export default {
   existByTitle,
   add,
   remove,
+  containProduct,
 }
