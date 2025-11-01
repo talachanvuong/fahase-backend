@@ -20,15 +20,15 @@ export default () => {
           photo_url: picture,
         }
 
-        const user = await userService.getByEmail(email)
+        let user = await userService.getByEmail(email)
 
         if (!user) {
-          await userService.create(data)
+          user = await userService.create(data)
         } else {
           await userService.update(user, data)
         }
 
-        done(null, data)
+        done(null, user)
       }
     )
   )

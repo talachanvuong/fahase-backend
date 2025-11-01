@@ -2,7 +2,7 @@ import User from '../models/User.js'
 
 const create = async (data) => {
   const user = new User(data)
-  await user.save()
+  return await user.save()
 }
 
 const getByEmail = async (email) => {
