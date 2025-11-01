@@ -38,7 +38,7 @@ const add = async (req, res) => {
     return sendResponse(
       res,
       STATUS_CODE.BAD_REQUEST,
-      'Loại sản phẩm đã tồn tại'
+      'Tên loại sản phẩm đã tồn tại'
     )
   }
 

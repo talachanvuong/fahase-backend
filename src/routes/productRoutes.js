@@ -20,4 +20,18 @@ router.post(
   errorMiddleware
 )
 
+router.get(
+  '/getById/:_id',
+  authMiddleware.tokenRequired,
+  asyncMiddleware(productController.getById),
+  errorMiddleware
+)
+
+router.patch(
+  '/update/:_id',
+  authMiddleware.tokenRequired,
+  asyncMiddleware(productController.update),
+  errorMiddleware
+)
+
 export default router

@@ -13,8 +13,26 @@ const add = async (data) => {
   await product.save()
 }
 
+const getById = async (_id) => {
+  return await Product.findOne({ _id })
+    .select('title price thumbnail description isDiscontinued')
+    .populate('category')
+}
+
+const getRawById = async (_id) => {
+  return await Product.findOne({ _id })
+}
+
+const update = async (product, data) => {
+  Object.assign(product, data)
+  await product.save()
+}
+
 export default {
   getAllByCategory,
   existByTitle,
   add,
+  getById,
+  getRawById,
+  update,
 }
