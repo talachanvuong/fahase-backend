@@ -28,7 +28,7 @@ router.post(
 )
 
 router.delete(
-  '/delete/:_id',
+  '/remove/:_id',
   authMiddleware.tokenRequired,
   asyncMiddleware(categoryController.remove),
   errorMiddleware
