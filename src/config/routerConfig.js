@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import cartRoutes from '../routes/cartRoutes.js'
 import categoryRoutes from '../routes/categoryRoutes.js'
 import passportRoutes from '../routes/passportRoutes.js'
 import productRoutes from '../routes/productRoutes.js'
@@ -6,6 +7,7 @@ import userRoutes from '../routes/userRoutes.js'
 
 const router = Router()
 
+router.use('/cart', cartRoutes)
 router.use('/category', categoryRoutes)
 router.use('/passport', passportRoutes)
 router.use('/product', productRoutes)

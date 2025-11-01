@@ -4,6 +4,10 @@ const getAllByCategory = async (category) => {
   return await Product.find({ category }).select('title price thumbnail')
 }
 
+const existById = async (_id) => {
+  return await Product.exists({ _id })
+}
+
 const existByTitle = async (title) => {
   return await Product.exists({ title })
 }
@@ -30,6 +34,7 @@ const update = async (product, data) => {
 
 export default {
   getAllByCategory,
+  existById,
   existByTitle,
   add,
   getById,
