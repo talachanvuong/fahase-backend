@@ -13,7 +13,7 @@ export default (app) => {
       credentials: true,
     })
   )
-  app.use(json())
+  app.use(json({ limit: Infinity }))
   app.use(
     session({
       secret: envConfig.secretKey,
