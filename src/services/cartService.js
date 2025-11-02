@@ -3,9 +3,14 @@ import Cart from '../models/Cart.js'
 const get = async (user) => {
   const carts = await Cart.find({ user })
     .select('product -_id')
-    .populate('product', 'title price thumbnail')
+    .populate('product', 'title price')
 
-  const products = carts.map((cart) => cart.product)
+  const products = carts.map((cart) => ({
+    _id: cart.product._id,
+    title: cart.product.title,
+    price: cart.product.price,
+    thumbnail: `/api/blob/thumbnail/${cart.product._id}`,
+  }))
   const quantity = products.length
   const price = products.reduce((acc, curr) => acc + curr.price, 0)
 

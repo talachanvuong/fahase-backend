@@ -1,7 +1,14 @@
 import Product from '../models/Product.js'
 
 const getAllByCategory = async (category) => {
-  return await Product.find({ category }).select('title price thumbnail')
+  const products = await Product.find({ category }).select('title price')
+
+  return products.map((product) => ({
+    _id: product._id,
+    title: product.title,
+    price: product.price,
+    thumbnail: `/api/blob/thumbnail/${product._id}`,
+  }))
 }
 
 const existById = async (_id) => {
@@ -18,9 +25,19 @@ const add = async (data) => {
 }
 
 const getById = async (_id) => {
-  return await Product.findOne({ _id })
-    .select('title price thumbnail description isDiscontinued')
+  const product = await Product.findOne({ _id })
+    .select('title price description isDiscontinued')
     .populate('category')
+
+  return {
+    _id: product._id,
+    title: product.title,
+    price: product.price,
+    thumbnail: `/api/blob/thumbnail/${product._id}`,
+    description: product.description,
+    isDiscontinued: product.isDiscontinued,
+    category: product.category,
+  }
 }
 
 const getRawById = async (_id) => {
