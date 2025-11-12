@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-const thumbnail = Joi.object({
+const thumbnailPublic = Joi.object({
   product: Joi.string()
     .trim()
     .regex(/^[0-9a-f]{24}$/)
@@ -10,5 +10,5 @@ const thumbnail = Joi.object({
 })
 
 export default {
-  thumbnail,
+  thumbnailPublic,
 }

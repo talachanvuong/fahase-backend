@@ -7,7 +7,7 @@ const getAllByCategory = async (category) => {
     _id: product._id,
     title: product.title,
     price: product.price,
-    thumbnail: `/api/blob/thumbnail/${product._id}`,
+    thumbnail: `/api/blob/thumbnailPublic/${product._id}`,
   }))
 }
 
@@ -33,7 +33,7 @@ const getById = async (_id) => {
     _id: product._id,
     title: product.title,
     price: product.price,
-    thumbnail: `/api/blob/thumbnail/${product._id}`,
+    thumbnail: `/api/blob/thumbnailPublic/${product._id}`,
     description: product.description,
     isDiscontinued: product.isDiscontinued,
     category: product.category,

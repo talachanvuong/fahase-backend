@@ -6,8 +6,8 @@ import errorMiddleware from '../middlewares/errorMiddleware.js'
 const router = Router()
 
 router.get(
-  '/thumbnail/:product',
-  asyncMiddleware(blobController.thumbnail),
+  '/thumbnailPublic/:product',
+  asyncMiddleware(blobController.thumbnailPublic),
   errorMiddleware
 )
 

@@ -3,15 +3,15 @@ import blobService from '../services/blobService.js'
 import { STATUS_CODE } from '../utils/constantUtils.js'
 import { sendResponse, sendStream } from '../utils/responseUtils.js'
 
-const thumbnail = async (req, res) => {
-  const { error, value } = blobSchema.thumbnail.validate(req.params)
+const thumbnailPublic = async (req, res) => {
+  const { error, value } = blobSchema.thumbnailPublic.validate(req.params)
 
   if (error) {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
   }
 
   const { product } = value
-  const blob = await blobService.thumbnail(product)
+  const blob = await blobService.thumbnailPublic(product)
 
   if (!blob) {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
@@ -21,5 +21,5 @@ const thumbnail = async (req, res) => {
 }
 
 export default {
-  thumbnail,
+  thumbnailPublic,
 }
