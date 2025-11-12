@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const productSchema = new mongoose.Schema(
+const orderItemSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -16,21 +16,13 @@ const productSchema = new mongoose.Schema(
       type: Buffer,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
     file: {
       type: Buffer,
       required: true,
     },
-    isDiscontinued: {
-      type: Boolean,
-      default: false,
-    },
-    category: {
+    order: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category',
+      ref: 'Order',
       required: true,
     },
   },
@@ -39,6 +31,6 @@ const productSchema = new mongoose.Schema(
   }
 )
 
-const Product = mongoose.model('Product', productSchema)
+const OrderItem = mongoose.model('OrderItem', orderItemSchema)
 
-export default Product
+export default OrderItem

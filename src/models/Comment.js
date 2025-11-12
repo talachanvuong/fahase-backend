@@ -1,7 +1,15 @@
 import mongoose from 'mongoose'
 
-const cartSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
   {
+    content: {
+      type: String,
+      required: true,
+    },
+    created_at: {
+      type: Date,
+      default: Date.now,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -18,16 +26,6 @@ const cartSchema = new mongoose.Schema(
   }
 )
 
-cartSchema.index(
-  {
-    user: 1,
-    product: 1,
-  },
-  {
-    unique: true,
-  }
-)
+const Comment = mongoose.model('Comment', commentSchema)
 
-const Cart = mongoose.model('Cart', cartSchema)
-
-export default Cart
+export default Comment

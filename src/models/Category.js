@@ -2,9 +2,15 @@ import mongoose from 'mongoose'
 
 const categorySchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, unique: true },
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
-  { versionKey: false }
+  {
+    versionKey: false,
+  }
 )
 
 const Category = mongoose.model('Category', categorySchema)
