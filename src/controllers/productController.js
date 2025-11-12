@@ -93,7 +93,11 @@ const update = async (req, res) => {
 
   if ('title' in valueBody) {
     if (await productService.existByTitle(valueBody.title)) {
-      return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Tên sản phẩm đã tồn tại')
+      return sendResponse(
+        res,
+        STATUS_CODE.BAD_REQUEST,
+        'Tên sản phẩm đã tồn tại'
+      )
     }
   }
 
@@ -112,9 +116,23 @@ const update = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, 'Sửa sản phẩm thành công')
 }
 
+const find = async (req, res) => {
+  const { error, value } = productSchema.find.validate(req.query)
+
+  if (error) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
+  }
+
+  const { keyword } = value
+  const products = await productService.find(keyword)
+
+  return sendResponse(res, STATUS_CODE.SUCCESS, products)
+}
+
 export default {
   getAllByCategory,
   add,
   getById,
   update,
+  find,
 }

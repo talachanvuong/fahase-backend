@@ -49,6 +49,22 @@ const update = async (product, data) => {
   await product.save()
 }
 
+const find = async (keyword) => {
+  const products = await Product.find({
+    title: {
+      $regex: keyword,
+      $options: 'i',
+    },
+  }).select('title price')
+
+  return products.map((product) => ({
+    _id: product._id,
+    title: product.title,
+    price: product.price,
+    thumbnail: `/api/blob/thumbnailPublic/${product._id}`,
+  }))
+}
+
 export default {
   getAllByCategory,
   existById,
@@ -57,4 +73,5 @@ export default {
   getById,
   getRawById,
   update,
+  find,
 }

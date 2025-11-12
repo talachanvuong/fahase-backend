@@ -106,10 +106,20 @@ const updateBody = Joi.object({
     'object.unknown': 'Thừa trường',
   })
 
+const find = Joi.object({
+  keyword: Joi.string().trim().required().messages({
+    'any.required': 'Thiếu keyword',
+    'string.empty': 'keyword không được để trống',
+  }),
+}).messages({
+  'object.unknown': 'Thừa trường',
+})
+
 export default {
   getAllByCategory,
   add,
   getById,
   updateParams,
   updateBody,
+  find,
 }

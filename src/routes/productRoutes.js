@@ -34,4 +34,10 @@ router.patch(
   errorMiddleware
 )
 
+router.get(
+  '/find',
+  asyncMiddleware(productController.find),
+  errorMiddleware
+)
+
 export default router
