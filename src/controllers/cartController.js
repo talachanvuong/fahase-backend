@@ -1,5 +1,6 @@
 import cartSchema from '../schemas/cartSchema.js'
 import cartService from '../services/cartService.js'
+import boughtService from '../services/boughtService.js'
 import productService from '../services/productService.js'
 import { STATUS_CODE } from '../utils/constantUtils.js'
 import { sendResponse } from '../utils/responseUtils.js'
@@ -24,6 +25,10 @@ const add = async (req, res) => {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
   }
 
+  if (await boughtService.isBought(user, product)) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm đã được mua')
+  }
+
   if (await cartService.containProduct(user, product)) {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm đã trong giỏ')
   }
@@ -40,7 +45,7 @@ const remove = async (req, res) => {
     return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
   }
 
-  const { _id:user } = req.user
+  const { _id: user } = req.user
   const { product } = value
 
   if (!(await productService.existById(product))) {
@@ -48,7 +53,11 @@ const remove = async (req, res) => {
   }
 
   if (!(await cartService.containProduct(user, product))) {
-    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không trong giỏ')
+    return sendResponse(
+      res,
+      STATUS_CODE.BAD_REQUEST,
+      'Sản phẩm không trong giỏ'
+    )
   }
 
   await cartService.remove(user, product)
