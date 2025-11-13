@@ -29,6 +29,10 @@ const getById = async (_id) => {
     .select('title price description isDiscontinued')
     .populate('category')
 
+  if (!product) {
+    return null
+  }
+
   return {
     _id: product._id,
     title: product.title,
