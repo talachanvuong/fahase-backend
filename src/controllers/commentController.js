@@ -16,7 +16,7 @@ const add = async (req, res) => {
   const { content, product } = value
 
   if (!(await productService.existById(product))) {
-    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
   }
 
   if (!(await boughtService.isBought(user, product))) {
@@ -38,7 +38,7 @@ const getAllByProduct = async (req, res) => {
   const { product } = value
 
   if (!(await productService.existById(product))) {
-    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
   }
 
   const comments = await commentService.getAllByProduct(product)

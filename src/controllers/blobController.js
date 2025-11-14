@@ -14,7 +14,7 @@ const thumbnailPublic = async (req, res) => {
   const blob = await blobService.thumbnailPublic(product)
 
   if (!blob) {
-    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
   }
 
   return sendStream(res, blob.thumbnail)

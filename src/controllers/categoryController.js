@@ -19,7 +19,7 @@ const getById = async (req, res) => {
   const category = await categoryService.getById(_id)
 
   if (!category) {
-    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Không có loại sản phẩm')
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Loại sản phẩm không tồn tại')
   }
 
   return sendResponse(res, STATUS_CODE.SUCCESS, category)
@@ -59,7 +59,7 @@ const remove = async (req, res) => {
   if (!(await categoryService.existById(_id))) {
     return sendResponse(
       res,
-      STATUS_CODE.BAD_REQUEST,
+      STATUS_CODE.NOT_FOUND,
       'Loại sản phẩm không tồn tại'
     )
   }

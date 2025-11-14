@@ -16,7 +16,7 @@ const getAllByCategory = async (req, res) => {
   if (!(await categoryService.existById(category))) {
     return sendResponse(
       res,
-      STATUS_CODE.BAD_REQUEST,
+      STATUS_CODE.NOT_FOUND,
       'Loại sản phẩm không tồn tại'
     )
   }
@@ -42,7 +42,7 @@ const add = async (req, res) => {
   if (!(await categoryService.existById(category))) {
     return sendResponse(
       res,
-      STATUS_CODE.BAD_REQUEST,
+      STATUS_CODE.NOT_FOUND,
       'Loại sản phẩm không tồn tại'
     )
   }
@@ -63,7 +63,7 @@ const getById = async (req, res) => {
   const product = await productService.getById(_id)
 
   if (!product) {
-    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
   }
 
   return sendResponse(res, STATUS_CODE.SUCCESS, product)
@@ -88,7 +88,7 @@ const update = async (req, res) => {
   const product = await productService.getRawById(_id)
 
   if (!product) {
-    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm không tồn tại')
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
   }
 
   if ('title' in valueBody) {
@@ -105,7 +105,7 @@ const update = async (req, res) => {
     if (!(await categoryService.existById(valueBody.category))) {
       return sendResponse(
         res,
-        STATUS_CODE.BAD_REQUEST,
+        STATUS_CODE.NOT_FOUND,
         'Loại sản phẩm không tồn tại'
       )
     }
