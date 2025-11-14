@@ -8,7 +8,7 @@ const router = Router()
 
 router.post(
   '/add',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(commentController.add),
   errorMiddleware
 )

@@ -8,36 +8,30 @@ const router = Router()
 
 router.get(
   '/getAllByCategory/:category',
-  authMiddleware.tokenRequired,
   asyncMiddleware(productController.getAllByCategory),
   errorMiddleware
 )
 
 router.post(
   '/add',
-  authMiddleware.tokenRequired,
+  authMiddleware.adminRequired,
   asyncMiddleware(productController.add),
   errorMiddleware
 )
 
 router.get(
   '/getById/:_id',
-  authMiddleware.tokenRequired,
   asyncMiddleware(productController.getById),
   errorMiddleware
 )
 
 router.patch(
   '/update/:_id',
-  authMiddleware.tokenRequired,
+  authMiddleware.adminRequired,
   asyncMiddleware(productController.update),
   errorMiddleware
 )
 
-router.get(
-  '/find',
-  asyncMiddleware(productController.find),
-  errorMiddleware
-)
+router.get('/find', asyncMiddleware(productController.find), errorMiddleware)
 
 export default router

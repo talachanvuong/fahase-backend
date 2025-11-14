@@ -8,7 +8,7 @@ const router = Router()
 
 router.get(
   '/isBought/:product',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(boughtController.isBought),
   errorMiddleware
 )

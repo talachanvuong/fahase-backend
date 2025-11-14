@@ -8,21 +8,21 @@ const router = Router()
 
 router.get(
   '/get',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(cartController.get),
   errorMiddleware
 )
 
 router.post(
   '/add',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(cartController.add),
   errorMiddleware
 )
 
 router.delete(
   '/remove/:product',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(cartController.remove),
   errorMiddleware
 )

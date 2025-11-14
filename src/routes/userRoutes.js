@@ -8,14 +8,14 @@ const router = Router()
 
 router.get(
   '/me',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(userController.me),
   errorMiddleware
 )
 
 router.post(
   '/logout',
-  authMiddleware.tokenRequired,
+  authMiddleware.userRequired,
   asyncMiddleware(userController.logout),
   errorMiddleware
 )

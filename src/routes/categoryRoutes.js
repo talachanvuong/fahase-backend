@@ -8,28 +8,28 @@ const router = Router()
 
 router.get(
   '/getAll',
-  authMiddleware.tokenRequired,
+  authMiddleware.adminRequired,
   asyncMiddleware(categoryController.getAll),
   errorMiddleware
 )
 
 router.get(
   '/getById/:_id',
-  authMiddleware.tokenRequired,
+  authMiddleware.adminRequired,
   asyncMiddleware(categoryController.getById),
   errorMiddleware
 )
 
 router.post(
   '/add',
-  authMiddleware.tokenRequired,
+  authMiddleware.adminRequired,
   asyncMiddleware(categoryController.add),
   errorMiddleware
 )
 
 router.delete(
   '/remove/:_id',
-  authMiddleware.tokenRequired,
+  authMiddleware.adminRequired,
   asyncMiddleware(categoryController.remove),
   errorMiddleware
 )

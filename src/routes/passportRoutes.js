@@ -4,11 +4,11 @@ import authMiddleware from '../middlewares/authMiddleware.js'
 
 const router = Router()
 
-router.get('/login', authMiddleware.anonymousRequired, passportController.login)
+router.get('/login', authMiddleware.notUserRequired, passportController.login)
 
 router.get(
   '/authorized',
-  authMiddleware.anonymousRequired,
+  authMiddleware.notUserRequired,
   passportController.authorized
 )
 
