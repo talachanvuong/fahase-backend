@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import adminRoutes from '../routes/adminRoutes.js'
 import blobRoutes from '../routes/blobRoutes.js'
 import boughtRoutes from '../routes/boughtRoutes.js'
 import cartRoutes from '../routes/cartRoutes.js'
@@ -10,6 +11,7 @@ import userRoutes from '../routes/userRoutes.js'
 
 const router = Router()
 
+router.use('/admin', adminRoutes)
 router.use('/blob', blobRoutes)
 router.use('/bought', boughtRoutes)
 router.use('/cart', cartRoutes)

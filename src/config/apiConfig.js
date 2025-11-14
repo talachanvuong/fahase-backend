@@ -1,4 +1,5 @@
 import MongoStore from 'connect-mongo'
+import cp from 'cookie-parser'
 import cors from 'cors'
 import { json } from 'express'
 import session from 'express-session'
@@ -14,6 +15,7 @@ export default (app) => {
     })
   )
   app.use(json({ limit: Infinity }))
+  app.use(cp())
   app.use(
     session({
       secret: envConfig.secretKey,
