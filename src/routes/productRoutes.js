@@ -34,4 +34,11 @@ router.patch(
 
 router.get('/find', asyncMiddleware(productController.find), errorMiddleware)
 
+router.get(
+  '/getAllByAdmin',
+  authMiddleware.adminRequired,
+  asyncMiddleware(productController.getAllByAdmin),
+  errorMiddleware
+)
+
 export default router

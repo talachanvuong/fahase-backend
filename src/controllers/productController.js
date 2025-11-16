@@ -129,10 +129,16 @@ const find = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, products)
 }
 
+const getAllByAdmin = async (req, res) => {
+  const products = await productService.getAllByAdmin()
+  return sendResponse(res, STATUS_CODE.SUCCESS, products)
+}
+
 export default {
   getAllByCategory,
   add,
   getById,
   update,
   find,
+  getAllByAdmin,
 }
