@@ -91,11 +91,11 @@ const getDetail = async (user, _id) => {
       _id: orderItem._id,
       title: orderItem.title,
       price: orderItem.price,
-      thumbnail: `/api/blob/thumbnailPublic/${orderItem._id}`,
+      thumbnail: `/api/blob/thumbnailBought/${orderItem._id}`,
     }
 
     if (result.state === 'Thành công') {
-      filtered_orderItem.file = `/api/blob/fileAdmin/${orderItem._id}`
+      filtered_orderItem.file = `/api/blob/fileBought/${orderItem._id}`
     }
 
     return filtered_orderItem
@@ -126,11 +126,15 @@ const getDetailByAdmin = async (_id) => {
     _id: orderItem._id,
     title: orderItem.title,
     price: orderItem.price,
-    thumbnail: `/api/blob/thumbnailPublic/${orderItem._id}`,
-    file: `/api/blob/fileAdmin/${orderItem._id}`,
+    thumbnail: `/api/blob/thumbnailBoughtAdmin/${orderItem._id}`,
+    file: `/api/blob/fileBoughtAdmin/${orderItem._id}`,
   }))
 
   return result
+}
+
+const getOrderItem = async (orderItem) => {
+  return await OrderItem.findOne({ _id: orderItem }).select('product')
 }
 
 export default {
@@ -142,4 +146,5 @@ export default {
   getAllByAdmin,
   getDetail,
   getDetailByAdmin,
+  getOrderItem,
 }

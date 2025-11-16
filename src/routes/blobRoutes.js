@@ -19,4 +19,32 @@ router.get(
   errorMiddleware
 )
 
+router.get(
+  '/thumbnailBought/:orderItem',
+  authMiddleware.userRequired,
+  asyncMiddleware(blobController.thumbnailBought),
+  errorMiddleware
+)
+
+router.get(
+  '/fileBought/:orderItem',
+  authMiddleware.userRequired,
+  asyncMiddleware(blobController.fileBought),
+  errorMiddleware
+)
+
+router.get(
+  '/thumbnailBoughtAdmin/:orderItem',
+  authMiddleware.adminRequired,
+  asyncMiddleware(blobController.thumbnailBoughtAdmin),
+  errorMiddleware
+)
+
+router.get(
+  '/fileBoughtAdmin/:orderItem',
+  authMiddleware.adminRequired,
+  asyncMiddleware(blobController.fileBoughtAdmin),
+  errorMiddleware
+)
+
 export default router
