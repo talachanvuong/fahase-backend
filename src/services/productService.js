@@ -84,6 +84,25 @@ const getAllByAdmin = async () => {
   }))
 }
 
+const getByIdByAdmin = async (_id) => {
+  const product = await Product.findOne({ _id }).populate('category')
+
+  if (!product) {
+    return null
+  }
+
+  return {
+    _id: product._id,
+    title: product.title,
+    price: product.price,
+    thumbnail: `/api/blob/thumbnailPublic/${product._id}`,
+    description: product.description,
+    file: `/api/blob/fileAdmin/${product._id}`,
+    isDiscontinued: product.isDiscontinued,
+    category: product.category,
+  }
+}
+
 export default {
   getAllByCategory,
   existById,
@@ -94,4 +113,5 @@ export default {
   update,
   find,
   getAllByAdmin,
+  getByIdByAdmin,
 }

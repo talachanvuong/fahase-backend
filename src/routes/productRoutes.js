@@ -41,4 +41,11 @@ router.get(
   errorMiddleware
 )
 
+router.get(
+  '/getByIdByAdmin/:_id',
+  authMiddleware.adminRequired,
+  asyncMiddleware(productController.getByIdByAdmin),
+  errorMiddleware
+)
+
 export default router

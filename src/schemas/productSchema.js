@@ -115,6 +115,15 @@ const find = Joi.object({
   'object.unknown': 'Thừa trường',
 })
 
+const getByIdByAdmin = Joi.object({
+  _id: Joi.string()
+    .trim()
+    .regex(/^[0-9a-f]{24}$/)
+    .messages({
+      'string.pattern.base': '_id không hợp lệ',
+    }),
+})
+
 export default {
   getAllByCategory,
   add,
@@ -122,4 +131,5 @@ export default {
   updateParams,
   updateBody,
   find,
+  getByIdByAdmin,
 }

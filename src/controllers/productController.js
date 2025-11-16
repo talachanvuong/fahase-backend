@@ -134,6 +134,23 @@ const getAllByAdmin = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, products)
 }
 
+const getByIdByAdmin = async (req, res) => {
+  const { error, value } = productSchema.getByIdByAdmin.validate(req.params)
+
+  if (error) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
+  }
+
+  const { _id } = value
+  const product = await productService.getByIdByAdmin(_id)
+
+  if (!product) {
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
+  }
+
+  return sendResponse(res, STATUS_CODE.SUCCESS, product)
+}
+
 export default {
   getAllByCategory,
   add,
@@ -141,4 +158,5 @@ export default {
   update,
   find,
   getAllByAdmin,
+  getByIdByAdmin,
 }
