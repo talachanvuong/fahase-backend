@@ -9,8 +9,8 @@ const add = async (data) => {
 const getAllByProduct = async (product) => {
   const comments = await Comment.find({ product })
     .select('-product')
-    .sort('-created_at')
     .populate('user', 'display_name photo_url')
+    .sort('-created_at')
 
   return comments.map((comment) => ({
     _id: comment._id,

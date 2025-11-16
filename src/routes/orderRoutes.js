@@ -27,4 +27,18 @@ router.post(
   errorMiddleware
 )
 
+router.get(
+  '/getAllByUser',
+  authMiddleware.userRequired,
+  asyncMiddleware(orderController.getAllByUser),
+  errorMiddleware
+)
+
+router.get(
+  '/getAllByAdmin',
+  authMiddleware.adminRequired,
+  asyncMiddleware(orderController.getAllByAdmin),
+  errorMiddleware
+)
+
 export default router

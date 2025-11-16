@@ -130,8 +130,21 @@ const cancel = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, 'Hủy đơn hàng thành công')
 }
 
+const getAllByUser = async (req, res) => {
+  const { _id: user } = req.user
+  const orders = await orderService.getAllByUser(user)
+  return sendResponse(res, STATUS_CODE.SUCCESS, orders)
+}
+
+const getAllByAdmin = async (req, res) => {
+  const orders = await orderService.getAllByAdmin()
+  return sendResponse(res, STATUS_CODE.SUCCESS, orders)
+}
+
 export default {
   create,
   capture,
   cancel,
+  getAllByUser,
+  getAllByAdmin,
 }
