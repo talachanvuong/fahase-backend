@@ -69,9 +69,15 @@ const me = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, req.admin)
 }
 
+const getReport = async (req, res) => {
+  const report = await adminService.getReport()
+  return sendResponse(res, STATUS_CODE.SUCCESS, report)
+}
+
 export default {
   create,
   login,
   logout,
   me,
+  getReport,
 }

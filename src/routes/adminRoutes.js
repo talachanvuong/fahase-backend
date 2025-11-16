@@ -6,11 +6,7 @@ import errorMiddleware from '../middlewares/errorMiddleware.js'
 
 const router = Router()
 
-router.post(
-  '/create',
-  asyncMiddleware(adminController.create),
-  errorMiddleware
-)
+router.post('/create', asyncMiddleware(adminController.create), errorMiddleware)
 
 router.post(
   '/login',
@@ -30,6 +26,13 @@ router.get(
   '/me',
   authMiddleware.adminRequired,
   asyncMiddleware(adminController.me),
+  errorMiddleware
+)
+
+router.get(
+  '/getReport',
+  authMiddleware.adminRequired,
+  asyncMiddleware(adminController.getReport),
   errorMiddleware
 )
 
