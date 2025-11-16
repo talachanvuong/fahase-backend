@@ -70,15 +70,15 @@ const find = async (keyword) => {
 }
 
 const getAllByAdmin = async () => {
-  const products = await Product.find().populate('category')
+  const products = await Product.find()
+    .select('title price thumbnail isDiscontinued category')
+    .populate('category')
 
   return products.map((product) => ({
     _id: product._id,
     title: product.title,
     price: product.price,
     thumbnail: `/api/blob/thumbnailPublic/${product._id}`,
-    description: product.description,
-    file: `/api/blob/fileAdmin/${product._id}`,
     isDiscontinued: product.isDiscontinued,
     category: product.category,
   }))
