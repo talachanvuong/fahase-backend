@@ -71,7 +71,7 @@ const find = async (keyword) => {
 
 const getAllByAdmin = async () => {
   const products = await Product.find()
-    .select('title price thumbnail isDiscontinued category')
+    .select('title price isDiscontinued category')
     .populate('category')
 
   return products.map((product) => ({
@@ -85,7 +85,9 @@ const getAllByAdmin = async () => {
 }
 
 const getByIdByAdmin = async (_id) => {
-  const product = await Product.findOne({ _id }).populate('category')
+  const product = await Product.findOne({ _id })
+    .select('title price description isDiscontinued category')
+    .populate('category')
 
   if (!product) {
     return null
