@@ -161,6 +161,23 @@ const getDetail = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, detail)
 }
 
+const getDetailByAdmin = async (req, res) => {
+  const { error, value } = orderSchema.getDetailByAdmin.validate(req.params)
+
+  if (error) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
+  }
+
+  const { order } = value
+  const detail = await orderService.getDetailByAdmin(order)
+
+  if (!detail) {
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Đơn hàng không tồn tại')
+  }
+
+  return sendResponse(res, STATUS_CODE.SUCCESS, detail)
+}
+
 export default {
   create,
   capture,
@@ -168,4 +185,5 @@ export default {
   getAllByUser,
   getAllByAdmin,
   getDetail,
+  getDetailByAdmin,
 }

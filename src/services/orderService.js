@@ -104,6 +104,35 @@ const getDetail = async (user, _id) => {
   return result
 }
 
+const getDetailByAdmin = async (_id) => {
+  const order = await Order.findOne({ _id })
+    .select('state user created_at')
+    .populate('user')
+
+  if (!order) {
+    return null
+  }
+
+  const result = {
+    _id: order._id,
+    state: order.state,
+    user: order.user,
+    created_at: convertTime(order.created_at),
+  }
+
+  const orderItems = await OrderItem.find({ order: _id }).select('title price')
+
+  result.orderItems = orderItems.map((orderItem) => ({
+    _id: orderItem._id,
+    title: orderItem.title,
+    price: orderItem.price,
+    thumbnail: `/api/blob/thumbnailPublic/${orderItem._id}`,
+    file: `/api/blob/fileAdmin/${orderItem._id}`,
+  }))
+
+  return result
+}
+
 export default {
   create,
   getByPayPalOrder,
@@ -112,4 +141,5 @@ export default {
   getAllByUser,
   getAllByAdmin,
   getDetail,
+  getDetailByAdmin,
 }
