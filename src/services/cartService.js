@@ -30,9 +30,14 @@ const remove = async (user, product) => {
   await Cart.deleteOne({ user, product })
 }
 
+const clear = async (user) => {
+  await Cart.deleteMany({ user })
+}
+
 export default {
   get,
   containProduct,
   add,
   remove,
+  clear,
 }

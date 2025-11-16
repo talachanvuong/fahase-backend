@@ -15,11 +15,11 @@ const add = Joi.object({
     'string.base': 'title phải là chuỗi',
     'string.empty': 'title không được để trống',
   }),
-  price: Joi.number().integer().min(0).required().messages({
+  price: Joi.number().integer().min(20000).required().messages({
     'any.required': 'Thiếu price',
     'number.base': 'price phải là số',
     'number.integer': 'price phải là số nguyên',
-    'number.min': 'price không được nhỏ hơn 0',
+    'number.min': 'price không được nhỏ hơn 20000',
   }),
   thumbnail: Joi.binary().required().messages({
     'any.required': 'Thiếu thumbnail',
@@ -75,10 +75,10 @@ const updateBody = Joi.object({
     'string.base': 'title phải là chuỗi',
     'string.empty': 'title không được để trống',
   }),
-  price: Joi.number().integer().min(0).messages({
+  price: Joi.number().integer().min(20000).messages({
     'number.base': 'price phải là số',
     'number.integer': 'price phải là số nguyên',
-    'number.min': 'price không được nhỏ hơn 0',
+    'number.min': 'price không được nhỏ hơn 20000',
   }),
   thumbnail: Joi.binary().messages({
     'binary.base': 'thumbnail phải là binary',

@@ -5,12 +5,11 @@ const orderItemSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     price: {
       type: Number,
       required: true,
-      min: 0,
+      min: 20000,
     },
     thumbnail: {
       type: Buffer,
@@ -25,9 +24,25 @@ const orderItemSchema = new mongoose.Schema(
       ref: 'Order',
       required: true,
     },
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+      required: true,
+    },
   },
   {
     versionKey: false,
+    collection: 'order_items',
+  }
+)
+
+orderItemSchema.index(
+  {
+    order: 1,
+    product: 1,
+  },
+  {
+    unique: true,
   }
 )
 

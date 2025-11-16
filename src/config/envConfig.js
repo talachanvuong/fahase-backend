@@ -7,4 +7,6 @@ export default {
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   mongoUri: process.env.MONGO_URI,
+  paypalClientId: process.env.PAYPAL_CLIENT_ID,
+  paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET,
 }

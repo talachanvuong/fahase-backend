@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
-      min: 0,
+      min: 20000,
     },
     thumbnail: {
       type: Buffer,

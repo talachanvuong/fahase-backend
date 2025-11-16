@@ -2,9 +2,14 @@ import mongoose from 'mongoose'
 
 const orderSchema = new mongoose.Schema(
   {
-    state: {
+    paypalOrder: {
       type: String,
       required: true,
+      unique: true,
+    },
+    state: {
+      type: String,
+      default: 'Chờ thanh toán',
     },
     created_at: {
       type: Date,

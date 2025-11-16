@@ -5,6 +5,7 @@ import boughtRoutes from '../routes/boughtRoutes.js'
 import cartRoutes from '../routes/cartRoutes.js'
 import categoryRoutes from '../routes/categoryRoutes.js'
 import commentRoutes from '../routes/commentRoutes.js'
+import orderRoutes from '../routes/orderRoutes.js'
 import passportRoutes from '../routes/passportRoutes.js'
 import productRoutes from '../routes/productRoutes.js'
 import userRoutes from '../routes/userRoutes.js'
@@ -17,6 +18,7 @@ router.use('/bought', boughtRoutes)
 router.use('/cart', cartRoutes)
 router.use('/category', categoryRoutes)
 router.use('/comment', commentRoutes)
+router.use('/order', orderRoutes)
 router.use('/passport', passportRoutes)
 router.use('/product', productRoutes)
 router.use('/user', userRoutes)
