@@ -1,5 +1,6 @@
 import { OrdersController } from '@paypal/paypal-server-sdk'
 import client from '../config/paypalConfig.js'
+import orderSchema from '../schemas/orderSchema.js'
 import boughtService from '../services/boughtService.js'
 import cartService from '../services/cartService.js'
 import orderService from '../services/orderService.js'
@@ -141,10 +142,30 @@ const getAllByAdmin = async (req, res) => {
   return sendResponse(res, STATUS_CODE.SUCCESS, orders)
 }
 
+const getDetail = async (req, res) => {
+  const { error, value } = orderSchema.getDetail.validate(req.params)
+
+  if (error) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, error.message)
+  }
+
+  const { _id: user } = req.user
+  const { order } = value
+
+  const detail = await orderService.getDetail(user, order)
+
+  if (!detail) {
+    return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Đơn hàng không tồn tại')
+  }
+
+  return sendResponse(res, STATUS_CODE.SUCCESS, detail)
+}
+
 export default {
   create,
   capture,
   cancel,
   getAllByUser,
   getAllByAdmin,
+  getDetail,
 }

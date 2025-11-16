@@ -71,6 +71,39 @@ const getAllByAdmin = async () => {
   }))
 }
 
+const getDetail = async (user, _id) => {
+  const order = await Order.findOne({ _id, user }).select('state created_at')
+
+  if (!order) {
+    return null
+  }
+
+  const result = {
+    _id: order._id,
+    state: order.state,
+    created_at: convertTime(order.created_at),
+  }
+
+  const orderItems = await OrderItem.find({ order: _id }).select('title price')
+
+  result.orderItems = orderItems.map((orderItem) => {
+    const filtered_orderItem = {
+      _id: orderItem._id,
+      title: orderItem.title,
+      price: orderItem.price,
+      thumbnail: `/api/blob/thumbnailPublic/${orderItem._id}`,
+    }
+
+    if (result.state === 'Thành công') {
+      filtered_orderItem.file = `/api/blob/fileAdmin/${orderItem._id}`
+    }
+
+    return filtered_orderItem
+  })
+
+  return result
+}
+
 export default {
   create,
   getByPayPalOrder,
@@ -78,4 +111,5 @@ export default {
   getOrderItemsById,
   getAllByUser,
   getAllByAdmin,
+  getDetail,
 }

@@ -41,4 +41,11 @@ router.get(
   errorMiddleware
 )
 
+router.get(
+  '/getDetail/:order',
+  authMiddleware.userRequired,
+  asyncMiddleware(orderController.getDetail),
+  errorMiddleware
+)
+
 export default router
