@@ -8,7 +8,6 @@ const router = Router()
 
 router.get(
   '/getAll',
-  authMiddleware.adminRequired,
   asyncMiddleware(categoryController.getAll),
   errorMiddleware
 )
