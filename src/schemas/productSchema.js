@@ -90,6 +90,9 @@ const updateBody = Joi.object({
   file: Joi.binary().messages({
     'binary.base': 'file phải là binary',
   }),
+  isDiscontinued: Joi.boolean().messages({
+    'boolean.base': 'isDiscontinued phải là boolean',
+  }),
   category: Joi.string()
     .trim()
     .regex(/^[0-9a-f]{24}$/)

@@ -20,9 +20,14 @@ const add = async (req, res) => {
 
   const { _id: user } = req.user
   const { product } = value
+  const existedProduct = await productService.getById(product)
 
-  if (!(await productService.existById(product))) {
+  if (!existedProduct) {
     return sendResponse(res, STATUS_CODE.NOT_FOUND, 'Sản phẩm không tồn tại')
+  }
+
+  if (existedProduct.isDiscontinued) {
+    return sendResponse(res, STATUS_CODE.BAD_REQUEST, 'Sản phẩm đã ngưng bán')
   }
 
   if (await boughtService.isBought(user, product)) {

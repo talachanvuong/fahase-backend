@@ -3,14 +3,26 @@ import Cart from '../models/Cart.js'
 const get = async (user) => {
   const carts = await Cart.find({ user })
     .select('product -_id')
-    .populate('product', 'title price')
+    .populate('product', 'title price isDiscontinued')
 
-  const products = carts.map((cart) => ({
-    _id: cart.product._id,
-    title: cart.product.title,
-    price: cart.product.price,
-    thumbnail: `/api/blob/thumbnailPublic/${cart.product._id}`,
-  }))
+  const products = []
+
+  for (const cart of carts) {
+    const product = cart.product
+
+    if (product.isDiscontinued) {
+      await remove(user, product._id)
+      continue
+    }
+
+    products.push({
+      _id: product._id,
+      title: product.title,
+      price: product.price,
+      thumbnail: `/api/blob/thumbnailPublic/${product._id}`,
+    })
+  }
+
   const quantity = products.length
   const price = products.reduce((acc, curr) => acc + curr.price, 0)
 
