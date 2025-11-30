@@ -17,10 +17,6 @@ const fileBought = async (orderItem) => {
   return await OrderItem.findOne({ _id: orderItem }).select('file')
 }
 
-const thumbnailBoughtAdmin = async (orderItem) => {
-  return await OrderItem.findOne({ _id: orderItem }).select('thumbnail')
-}
-
 const fileBoughtAdmin = async (orderItem) => {
   return await OrderItem.findOne({ _id: orderItem }).select('file')
 }
@@ -30,6 +26,5 @@ export default {
   fileAdmin,
   thumbnailBought,
   fileBought,
-  thumbnailBoughtAdmin,
   fileBoughtAdmin,
 }

@@ -21,7 +21,6 @@ router.get(
 
 router.get(
   '/thumbnailBought/:orderItem',
-  authMiddleware.userRequired,
   asyncMiddleware(blobController.thumbnailBought),
   errorMiddleware
 )
@@ -30,13 +29,6 @@ router.get(
   '/fileBought/:orderItem',
   authMiddleware.userRequired,
   asyncMiddleware(blobController.fileBought),
-  errorMiddleware
-)
-
-router.get(
-  '/thumbnailBoughtAdmin/:orderItem',
-  authMiddleware.adminRequired,
-  asyncMiddleware(blobController.thumbnailBoughtAdmin),
   errorMiddleware
 )
 

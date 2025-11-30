@@ -36,15 +36,6 @@ const fileBought = Joi.object({
     }),
 })
 
-const thumbnailBoughtAdmin = Joi.object({
-  orderItem: Joi.string()
-    .trim()
-    .regex(/^[0-9a-f]{24}$/)
-    .messages({
-      'string.pattern.base': 'orderItem không hợp lệ',
-    }),
-})
-
 const fileBoughtAdmin = Joi.object({
   orderItem: Joi.string()
     .trim()
@@ -59,6 +50,5 @@ export default {
   fileAdmin,
   thumbnailBought,
   fileBought,
-  thumbnailBoughtAdmin,
   fileBoughtAdmin,
 }

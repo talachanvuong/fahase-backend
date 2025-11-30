@@ -126,7 +126,7 @@ const getDetailByAdmin = async (_id) => {
     _id: orderItem._id,
     title: orderItem.title,
     price: orderItem.price,
-    thumbnail: `/api/blob/thumbnailBoughtAdmin/${orderItem._id}`,
+    thumbnail: `/api/blob/thumbnailBought/${orderItem._id}`,
     file: `/api/blob/fileBoughtAdmin/${orderItem._id}`,
   }))
 
